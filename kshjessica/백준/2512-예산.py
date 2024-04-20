@@ -1,6 +1,9 @@
-n = int(input())  # Number of regions
-budget = list(map(int, input().split()))  # Budget requests for each region
-m = int(input())  # Total budget
+# Number of regions
+n = int(input())
+# Budget requests for each region
+budget = list(map(int, input().split()))
+# Total budget
+m = int(input())
 
 start, end = 0, max(budget)  # Initialize start and end points for binary search
 total_budget = 0  # Variable to store the total budget allocated
