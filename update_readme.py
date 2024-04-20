@@ -1,38 +1,38 @@
 import re
-from datetime import datetime
 
-# Define the filename for README.md
-README_FILE = "README.md"
 
-# Parse commit messages and update the README.md file
-def update_readme():
-    # Read the content of README.md
-    with open(README_FILE, "r") as file:
-        readme_content = file.readlines()
+def update_readme(commit_message):
+    # Extract information from the commit message
+    match = re.match(r"\[(\d+)\]\s*풀이\s*완료\((\d+)\)", commit_message)
+    if not match:
+        print("Invalid commit message format")
+        return
 
-    # Extract existing data from README.md
-    table_data = []
-    for line in readme_content:
-        match = re.match(r"\|(\d{6})\s*\|(\d+)\s*\|(.+)\s*\|(.+)\s*\|(.+)\s*\|(.+)\s*\|", line)
-        if match:
-            table_data.append(match.groups())
+    problem_number = match.group(1)
+    meeting_date = match.group(2)
 
-    # Get the latest commit message and extract question number, solve status, and meeting date
-    latest_commit_message = input()  # You need to capture the latest commit message here
-    match = re.match(r"\[(\d+)\]\s*(.+)\((\d{6})\)", latest_commit_message)
-    if match:
-        question_number, solve_status, meeting_date = match.groups()
-        meeting_date = datetime.strptime(meeting_date, "%y%m%d").strftime("%y%m%d")
+    # Read the existing contents of the README.md file
+    with open('README.md', 'r') as file:
+        lines = file.readlines()
 
-        # Update table data with the latest commit
-        for i, row in enumerate(table_data):
-            if row[0] == meeting_date:
-                table_data[i] = (row[0], row[1], *["풀이 완료" if idx == int(question_number) else cell for idx, cell in enumerate(row[2:], start=1)])
+    # Find the row corresponding to the meeting date
+    row_index = None
+    for i, line in enumerate(lines):
+        if meeting_date in line:
+            row_index = i
+            break
 
-    # Update README.md with the updated table data
-    with open(README_FILE, "w") as file:
-        for row in table_data:
-            file.write(f"|{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]} | {row[5]} |\n")
+    # If the row doesn't exist, add it at the end
+    if row_index is None:
+        lines.append(f"|{meeting_date}| {problem_number} | | | | |\n")
+    else:
+        # Update the row with the problem number and your name
+        lines[row_index] = re.sub(r"\|\s*$", f"| {problem_number} | 풀이 완료 | | | | |\n", lines[row_index])
 
-# Run the function to update README.md
-update_readme()
+    # Write the updated contents back to the README.md file
+    with open('README.md', 'w') as file:
+        file.writelines(lines)
+
+# Example usage
+commit_message = '[3758] 풀이 완료(240410)'
+update_readme(commit_message)
