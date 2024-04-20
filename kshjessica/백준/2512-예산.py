@@ -19,7 +19,8 @@ else:
         # Calculate the middle point
         mid = (start + end) // 2
 
-        total_budget = 0  # Reset the total budget allocated
+        # Reset the total budget allocated
+        total_budget = 0 
 
         for i in budget:  # Iterate through each budget request
             total_budget += min(mid, i)  # Allocate the minimum of mid and the budget request
