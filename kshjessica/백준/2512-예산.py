@@ -22,7 +22,8 @@ else:
         # Reset the total budget allocated
         total_budget = 0 
 
-        for i in budget:  # Iterate through each budget request
+        # Iterate through each budget request
+        for i in budget:
             total_budget += min(mid, i)  # Allocate the minimum of mid and the budget request
 
         if total_budget > m:  # If the total allocated budget is greater than the total budget
