@@ -1,4 +1,5 @@
 import re
+import sys
 
 # Dictionary to map GitHub IDs to display names
 github_ids = {
@@ -8,7 +9,7 @@ github_ids = {
     "chhaewxn": "송채원"
 }
 
-def update_readme(commit_message, lines):
+def update_readme(commit_message, commit_author, lines):
     # Extract information from the commit message
     match = re.match(r"\[(\d+)\]\s*(풀이\s*(중|완료))\((\d+)\)", commit_message)
     if not match:
@@ -40,11 +41,15 @@ def update_readme(commit_message, lines):
 
     return lines
 
+# Read the commit message from command line arguments
+commit_message = sys.argv[1]
+commit_author = sys.argv[2]
+
 # Read the existing contents of the README.md file
 with open('README.md', 'r') as file:
     lines = file.readlines()
 
-updated_lines = update_readme(commit_message, lines)
+updated_lines = update_readme(commit_message, commit_author, lines)
 
 # Write the updated contents back to the README.md file
 with open('README.md', 'w') as file:

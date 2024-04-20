@@ -6,14 +6,28 @@ on:
       - main
 
 jobs:
-  update-readme:
+  check-commit-message:
     runs-on: ubuntu-latest
+    steps:
+      - name: Check commit message
+        run: |
+          if [[ "${{ github.event.head_commit.message }}" =~ ^\[[0-9]+\] ]]; then
+            echo "Commit message starts with [<number>], triggering the workflow..."
+          else
+            echo "Commit message does not start with [<number>], skipping the workflow..."
+            exit 78  # Skip the workflow
+          fi
+
+  update-readme:
+    needs: check-commit-message
+    runs-on: ubuntu-latest
+    if: ${{ needs.check-commit-message.result == 'success' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Run script to update README
-        run: python update_readme.py
+        run: python update_readme.py "${{ github.event.head_commit.message }}" ${{ github.actor }}
 
       - name: Commit changes
         run: |
@@ -21,7 +35,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add README.md
           git commit -m "[DOCS] Update New Submission"
-      
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
