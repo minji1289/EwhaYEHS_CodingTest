@@ -15,7 +15,7 @@ for _ in range(T):
         i, j, s = map(int, input().split())
         # update the maximum score for the team and problem
         scores[i][j] = max(scores[i][j], s)
-        # record the ;ast submission time for the team
+        # record the last submission time for the team
         times[i] = time
         # increment the number of attempts for the team
         attempts[i] += 1
