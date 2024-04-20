@@ -31,4 +31,5 @@ for _ in range(input):
       
   key_data = list(score_map.keys())
   key_data.sort(key=lambda x: (score_map[x], fifth_score[x]))
+  
   print(key_data[0])
