@@ -1,6 +1,9 @@
-n = int(input())  # Number of words given
-target = list(input())  # First word to compare against
-answer = 0  # Counter for similar words
+# Number of words given
+n = int(input())
+# First word to compare against
+target = list(input())
+# Counter for similar words
+answer = 0
 
 for _ in range(n - 1):
     compare = target[:]  # Make a copy of the target word
