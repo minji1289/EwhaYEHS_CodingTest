@@ -9,8 +9,10 @@ start, end = 0, max(budget)
 # Variable to store the total budget allocated
 total_budget = 0 
 
-if sum(budget) >= end:  # If the sum of all budget requests is greater than or equal to the maximum budget request
-    print(max(budget))  # Print the maximum budget request
+# If the sum of all budget requests is greater than or equal to the maximum budget request
+if sum(budget) >= end:
+    # Print the maximum budget request 
+    print(max(budget))
 else:
     while start <= end:  # Binary search loop
         mid = (start + end) // 2  # Calculate the middle point
