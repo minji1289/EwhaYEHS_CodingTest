@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run script to update README
-        run: python update_readme.py ${{ github.event.head_commit.message }} ${{ github.actor }}
+        run: python update_readme.py "${{ github.event.head_commit.message }}" ${{ github.actor }}
 
       - name: Commit changes
         run: |
