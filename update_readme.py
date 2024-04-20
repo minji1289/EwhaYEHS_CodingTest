@@ -1,38 +1,51 @@
 import re
 
+# Dictionary to map GitHub IDs to display names
+github_ids = {
+    "minyouki": "김민영",
+    "minji": "김민지",
+    "kshjessica": "김서현",
+    "chhaewxn": "송채원"
+}
 
-def update_readme(commit_message):
+def update_readme(commit_message, lines):
     # Extract information from the commit message
-    match = re.match(r"\[(\d+)\]\s*풀이\s*완료\((\d+)\)", commit_message)
+    match = re.match(r"\[(\d+)\]\s*(풀이\s*(중|완료))\((\d+)\)", commit_message)
     if not match:
         print("Invalid commit message format")
         return
 
     problem_number = match.group(1)
-    meeting_date = match.group(2)
+    solve_status = match.group(2)
+    meeting_date = match.group(4)
 
-    # Read the existing contents of the README.md file
-    with open('README.md', 'r') as file:
-        lines = file.readlines()
-
-    # Find the row corresponding to the meeting date
+    # Find the row corresponding to the meeting date and problem number
     row_index = None
     for i, line in enumerate(lines):
-        if meeting_date in line:
+        if f"|{meeting_date}|{problem_number}" in line:
             row_index = i
             break
 
     # If the row doesn't exist, add it at the end
     if row_index is None:
-        lines.append(f"|{meeting_date}| {problem_number} | | | | |\n")
+        lines.append(f"|{meeting_date}|{problem_number}|")
+        for github_id in github_ids:
+            lines[-1] += f"{solve_status if github_id == commit_author else '-'}|"
+        lines[-1] += "\n"
     else:
-        # Update the row with the problem number and your name
-        lines[row_index] = re.sub(r"\|\s*$", f"| {problem_number} | 풀이 완료 | | | | |\n", lines[row_index])
+        # Update the row with the solve status
+        for github_id in github_ids:
+            if github_id == commit_author:
+                lines[row_index] = re.sub(r"\|\s*$", f"|{solve_status}|", lines[row_index])
 
-    # Write the updated contents back to the README.md file
-    with open('README.md', 'w') as file:
-        file.writelines(lines)
+    return lines
 
-# Example usage
-commit_message = '[3758] 풀이 완료(240410)'
-update_readme(commit_message)
+# Read the existing contents of the README.md file
+with open('README.md', 'r') as file:
+    lines = file.readlines()
+
+updated_lines = update_readme(commit_message, lines)
+
+# Write the updated contents back to the README.md file
+with open('README.md', 'w') as file:
+    file.writelines(updated_lines)
