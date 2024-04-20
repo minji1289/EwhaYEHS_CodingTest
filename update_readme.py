@@ -27,17 +27,17 @@ def update_readme(commit_message, commit_author, lines):
             row_index = i
             break
 
-    # If the row doesn't exist, add it at the end
-    if row_index is None:
+    # If both meeting date and problem number exist, update the row
+    if meeting_date and problem_number and row_index is not None:
+        for github_id in github_ids:
+            if github_id == commit_author:
+                lines[row_index] = re.sub(r"\|\s*$", f"|{solve_status}|", lines[row_index])
+    # If only one of meeting date and problem number exists, or if both are missing, add row
+    else:
         lines.append(f"|{meeting_date}|{problem_number}|")
         for github_id in github_ids:
             lines[-1] += f"{solve_status if github_id == commit_author else '-'}|"
         lines[-1] += "\n"
-    else:
-        # Update the row with the solve status
-        for github_id in github_ids:
-            if github_id == commit_author:
-                lines[row_index] = re.sub(r"\|\s*$", f"|{solve_status}|", lines[row_index])
 
     return lines
 
