@@ -1,5 +1,7 @@
-n, m = map(int, input().split())  # Read the number of keywords and the number of blog posts
-keywords = {input().rstrip() for _ in range(n)}  # Create a set of keywords from user input
+# Read the number of keywords and the number of blog posts
+n, m = map(int, input().split())
+# Create a set of keywords from user input
+keywords = {input().rstrip() for _ in range(n)}
 
 for _ in range(m):
     for key in input().rstrip().split(','):  # Read the keywords related to each blog post
