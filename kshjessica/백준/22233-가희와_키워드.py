@@ -6,6 +6,8 @@ keywords = {input().rstrip() for _ in range(n)}
 for _ in range(m):
     # Read the keywords related to each blog post
     for key in input().rstrip().split(','):
-        keywords.discard(key)  # Remove the keywords from the set
+        # Remove the keywords from the set
+        keywords.discard(key)
 
-    print(len(keywords))  # Print the number of remaining keywords after each blog post
+    # Print the number of remaining keywords after each blog post
+    print(len(keywords))
