@@ -4,7 +4,8 @@ n, m = map(int, input().split())
 keywords = {input().rstrip() for _ in range(n)}
 
 for _ in range(m):
-    for key in input().rstrip().split(','):  # Read the keywords related to each blog post
+    # Read the keywords related to each blog post
+    for key in input().rstrip().split(','):
         keywords.discard(key)  # Remove the keywords from the set
 
     print(len(keywords))  # Print the number of remaining keywords after each blog post
