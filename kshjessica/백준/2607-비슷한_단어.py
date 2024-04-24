@@ -19,4 +19,5 @@ for _ in range(n - 1):
     if cnt < 2 and len(compare) < 2:
         answer += 1  # Increment the answer counter if the words are similar
 
-print(answer)  # Print the number of similar words
+# Print the number of similar words
+print(answer)
