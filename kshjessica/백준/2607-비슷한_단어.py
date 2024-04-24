@@ -15,7 +15,8 @@ for _ in range(n - 1):
             # Remove matching characters from the copy
             compare.remove(w)
         else:
-            cnt += 1  # Increment the difference counter
+            # Increment the difference counter
+            cnt += 1
 
     if cnt < 2 and len(compare) < 2:
         answer += 1  # Increment the answer counter if the words are similar
