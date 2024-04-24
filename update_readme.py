@@ -10,8 +10,6 @@ github_ids = {
 }
 
 def update_readme(commit_message, commit_author, lines):
-    print("commit_message: ", commit_message)
-    print("commit_author: ", commit_author)
   
     # Extract information from the commit message
     match = re.match(r"\[(\d+)\]\s*(풀이\s*(중|완료))\((\d+)\)", commit_message)
@@ -22,17 +20,12 @@ def update_readme(commit_message, commit_author, lines):
     problem_number = match.group(1)
     solve_status = match.group(2)
     meeting_date = match.group(4)
-    
-    print("problem_number: ", problem_number)
-    print("solve_status: ", solve_status)
-    print("meeting_date: ", meeting_date)
 
     # Find the row corresponding to the meeting date and problem number
     row_index = None
     for i, line in enumerate(lines):
         if f"|{meeting_date}|{problem_number}" in line:
             row_index = i
-            print("row_index: ", row_index)
             break
 
     # If both meeting date and problem number exist, update the row
@@ -55,18 +48,16 @@ def update_readme(commit_message, commit_author, lines):
             # Reconstruct the line with the updated solve status
             lines[row_index] = '|'.join(segments)
 
-            print(lines[row_index])
-
         # If there is no row for the meeting date and problem number, add a new row
         else:
             new_row = f"|{meeting_date}|{problem_number}|"
             for github_id in github_ids:
                 new_row += f"{solve_status if github_id == commit_author else '-'}|"
-                print(new_row)
             new_row += "\n"
             lines.append(new_row)
 
-    lines.sort(key=lambda x: (x.split('|')[1], int(x.split('|')[2])))
+    # sort lines in order of meeting_date and then sort again in order of problem_number within the same meeting_date
+    lines[8:] = sorted(lines[8:], key=lambda x: (int(x.split('|')[1]), int(x.split('|')[2])))
     
     return lines
 
