@@ -9,6 +9,7 @@ for _ in range(T):
     scores = [[0]*(k+1) for _ in range(n+1)]
     times = [0]*(n+1)
     attempts = [0]*(n+1)
+    
     # Log entries
     for time in range(1, m+1):
 		    # team ID, problem ID, score
