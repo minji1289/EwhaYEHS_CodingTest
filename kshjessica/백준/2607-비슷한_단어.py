@@ -12,7 +12,8 @@ for _ in range(n - 1):
 
     for w in word:
         if w in compare:
-            compare.remove(w)  # Remove matching characters from the copy
+            # Remove matching characters from the copy
+            compare.remove(w)
         else:
             cnt += 1  # Increment the difference counter
 
