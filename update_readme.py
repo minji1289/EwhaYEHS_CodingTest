@@ -66,6 +66,8 @@ def update_readme(commit_message, commit_author, lines):
             new_row += "\n"
             lines.append(new_row)
 
+    lines.sort(key=lambda x: (x.split('|')[0], int(x.split('|')[1])))
+    
     return lines
 
 # Read the commit message from command line arguments
