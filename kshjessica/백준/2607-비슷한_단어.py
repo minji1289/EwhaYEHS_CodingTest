@@ -18,10 +18,9 @@ for _ in range(n - 1):
             # Increment the difference counter
             cnt += 1
 
-            
+
 
     if cnt < 2 and len(compare) < 2:
         answer += 1 
 
-# Print the number of similar words
 print(answer)
