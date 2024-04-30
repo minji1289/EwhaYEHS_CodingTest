@@ -1,11 +1,6 @@
 import sys
 input = sys.stdin.readline
 
-#dict에 읽어들이는 문자 d[value]+=1
-#if d[value]+=3, 다음 인덱스에 오는 애는 같은 문자여야함
-#if not, 바로 FAKE.
-# FAKE가 아니면 OK
-
 num = int(input())
 
 for i in range(num):
