@@ -1,3 +1,6 @@
+"""
+설명 추가 예정
+"""
 N = int(input())  # Read the value of N from input
 
 schedule = []  # Create an empty list to store the schedule
