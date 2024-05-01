@@ -22,4 +22,4 @@ for i in range(num):
             print('FAKE')
             break
         if (i==len(s)-1): #마지막 글자인데 위의 예외조건에 안걸리면,
-            print('OK') #진짜 메시지
+            print('OK') #진짜 메시지이면 OK print
