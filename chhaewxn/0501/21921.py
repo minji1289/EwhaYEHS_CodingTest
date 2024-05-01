@@ -1,8 +1,10 @@
 # 21921번 - 블로그 
 import sys
 
-n,x = map(int, sys.stdin.readline().split())
-visitor = list(map(int, sys.stdin.readline().split()))
+input = sys.stdin.readline
+
+n,x = map(int, input.split())
+visitor = list(map(int, input.split()))
 
 # x 기간 동안 총 방문자 수 합 계산 
 max_sum = sum(visitor[:x])
