@@ -1,3 +1,4 @@
+# 2607 - 비슷한 단어
 # 두 문자열의 길이 차이가 1 이하 
 # 두 문자열을 구성하는 문자의 종류 차이가 1 이하
 from collections import Counter
