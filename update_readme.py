@@ -4,7 +4,7 @@ import sys
 # Dictionary to map GitHub IDs to display names
 github_ids = {
     "minyouki": "김민영",
-    "minji": "김민지",
+    "minji1289": "김민지",
     "kshjessica": "김서현",
     "chhaewxn": "송채원"
 }
