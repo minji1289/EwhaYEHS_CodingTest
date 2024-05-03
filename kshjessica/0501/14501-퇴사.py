@@ -1,4 +1,4 @@
-N = int(input())  # Read the value of N from input
+N = int(input())  # Read the value of N from input and convert it to an integer
 
 schedule = []  # Create an empty list to store the schedule
 
