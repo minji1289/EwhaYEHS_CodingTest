@@ -3,13 +3,13 @@ N = int(input())
 # Calculate the size of the pattern
 size = 4 * N - 3
 
-# Create the pattern(original version)
+# Create the pattern(original solution)
 '''
 pattern = []
 for _ in range(size):
     pattern.append([' '] * size)
 '''
-# Create the pattern(compact version)
+# Create the pattern(compact solution)
 pattern = [[' '] * size for _ in range(size)]
 
 # Recursive function to fill the pattern
