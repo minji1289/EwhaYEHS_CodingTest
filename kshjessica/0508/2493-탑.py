@@ -1,5 +1,5 @@
 """
-[새로 배운 것]
+[TIL] 0508
 
 The * operator in print(*answer) is known as the unpacking operator in Python. It is used to unpack the elements of the answer iterable (like a list or a tuple) into the print function.
 
